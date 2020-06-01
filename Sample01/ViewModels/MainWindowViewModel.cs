@@ -33,6 +33,13 @@ namespace Sample01.ViewModels
             set { SetProperty(ref _isViewUsrCtrlAEnabled, value); }
         }
 
+        private bool _isVisibilityTestResultButtonVisible = false;
+        public bool IsVisibilityTestResultButtonVisible
+        {
+            get { return _isVisibilityTestResultButtonVisible; }
+            set { SetProperty(ref _isVisibilityTestResultButtonVisible, value); }
+        }
+
         public DelegateCommand UpdateSystemDateStrCmd { get; }
 
         public DelegateCommand ShowViewUsrCtrlACmd { get; }
@@ -44,6 +51,8 @@ namespace Sample01.ViewModels
         public DelegateCommand ShowViewUsrCtrlBWithParamCmd { get; }
 
         public DelegateCommand ShowViewUsrCtrlCCmd { get; }
+
+        public DelegateCommand HideVisibilityTestResultButtonCmd { get; }
 
 
         // 引数: IRegionManager, IDialogService ... 引数に指定すればPrismが自動的にコンストラクタに与えてくれる。
@@ -63,12 +72,15 @@ namespace Sample01.ViewModels
             this.ShowViewUsrCtrlBCmd = new DelegateCommand(ShowViewUsrCtrlB);
             this.ShowViewUsrCtrlBWithParamCmd = new DelegateCommand(ShowViewUsrCtrlBWithParam);
             this.ShowViewUsrCtrlCCmd = new DelegateCommand(ShowViewUsrCtrlC);
+            this.HideVisibilityTestResultButtonCmd = new DelegateCommand(HideVisibilityTestResultButton);
         }
 
 
         private void UpdateSystemDateStr()
         {
             this.SystemDateString = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+
+            this.IsVisibilityTestResultButtonVisible = true;
         }
 
         // Region・ナビゲートによる画面遷移
@@ -148,6 +160,11 @@ namespace Sample01.ViewModels
                 source: nameof(ViewUsrCtrlC),  // 表示するView名
                 navigationCallback: (navResult) => { }  // ナビゲーション完了後に実行されるナビゲーションコールバック(Action<NavigationResult>型)
             );
+        }
+
+        private void HideVisibilityTestResultButton()
+        {
+            this.IsVisibilityTestResultButtonVisible = false;
         }
     }
 }

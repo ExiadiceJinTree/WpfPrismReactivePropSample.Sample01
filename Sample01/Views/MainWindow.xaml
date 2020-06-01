@@ -4,6 +4,12 @@
         xmlns:prism="http://prismlibrary.com/"
         prism:ViewModelLocator.AutoWireViewModel="True"
         Title="{Binding Title}" Height="550" Width="600" WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <!--Bool値とコントロールのVisibilityプロパティ値を変換するためのConverter(よく使うためかConverter用意済)-->
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </Window.Resources>
+    
     <Grid>
         <ScrollViewer HorizontalScrollBarVisibility="Auto">
             <StackPanel>
@@ -23,6 +29,14 @@
                 </StackPanel>
                 <StackPanel Margin="5">
                     <Button Content="Show 画面UserControlC with ListBox, GroupBox" Command="{Binding ShowViewUsrCtrlCCmd}"/>
+                </StackPanel>
+                <StackPanel Margin="5">
+                    <Label Content="[システム日時更新]ボタンをクリックすると、↓にボタンが表示されます。"/>
+                    <!--コントロール表示非表示はVisibilityプロパティで設定するが、値がbool型ではない。
+                        bool値と変換するためにBooleanToVisibilityConverterを用いる。-->
+                    <Button Content="表示されました"
+                            Visibility="{Binding IsVisibilityTestResultButtonVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
+                            Command="{Binding HideVisibilityTestResultButtonCmd}"/>
                 </StackPanel>
                 <ContentControl prism:RegionManager.RegionName="ContentRegion" />
             </StackPanel>
