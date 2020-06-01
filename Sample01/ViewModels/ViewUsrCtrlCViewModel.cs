@@ -16,6 +16,7 @@ namespace Sample01.ViewModels
     public class ViewUsrCtrlCViewModel : BindableBase, IConfirmNavigationRequest
     //public class ViewUsrCtrlCViewModel : BindableBase
     {
+        private MainWindowViewModel _mainWindowViewModel;
         private IMessageService _messageService;
 
         private ObservableCollection<string> _myListBox = new ObservableCollection<string>();
@@ -82,15 +83,19 @@ namespace Sample01.ViewModels
 
 
         // 単体テスト以外用コンストラクタ
-        public ViewUsrCtrlCViewModel()
-            : this(new MessageService())
+        public ViewUsrCtrlCViewModel(MainWindowViewModel mainWindowViewModel)
+            : this(mainWindowViewModel, new MessageService())
         {
         }
 
-        // 単体テスト用コンストラクタ
-        public ViewUsrCtrlCViewModel(IMessageService messageService)
+        // ・単体テスト用コンストラクタ
+        // ・App.xaml.csでcontainerRegistry.RegisterSingleton<MainWindowViewModel>()でシングルトンインスタンス登録しているため、
+        // 　コンストラクタインジェクションにより子画面ViewModelからでもMainWindowViewModelにアクセスできる。
+        public ViewUsrCtrlCViewModel(MainWindowViewModel mainWindowViewModel, IMessageService messageService)
+        //public ViewUsrCtrlCViewModel(IMessageService messageService)
         //public ViewUsrCtrlCViewModel()
         {
+            _mainWindowViewModel = mainWindowViewModel;
             _messageService = messageService;
 
             this.AAreasComboBox_SelectionChangedCmd = new DelegateCommand<SelectionChangedEventArgs>(AAreasComboBox_SelectionChanged);
@@ -127,6 +132,9 @@ namespace Sample01.ViewModels
             sb.AppendLine("・SelectedArea's Value&Name from EventArgs: " + selectedAArea.Value + "," + selectedAArea.Name);
             sb.AppendLine("・SelectedArea's Value&Name from BindingProp: " + this.SelectedAArea.Value + "," + this.SelectedAArea.Name);
             this.SelectedAAreaInfo = sb.ToString();
+
+            // MainWindowViewModelにアクセス
+            _mainWindowViewModel.MainWindowVMAccessTestLabel = this.SelectedAArea.Value + "," + this.SelectedAArea.Name + "from "+ nameof(ViewUsrCtrlCViewModel);
         }
 
         // Buttonでも、普通にCommandプロパティでバインドした場合は、DelegateCommand<T> のパラメータはnullになってしまいイベントパラメータは利用できない。

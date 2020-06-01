@@ -18,6 +18,11 @@ namespace Sample01
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            // アプリケーションのどこからでも(子画面からでも)メイン画面にアクセスし操作するために、
+            // メイン画面はアプリケーションで1つのみと設定しておく(MainWindowViewModelをシングルトンインスタンスとして登録する)。
+            // こうすると、子画面ViewModelのコンストラクタインジェクションによりMainWindowViewModelにアクセスできる。
+            containerRegistry.RegisterSingleton<MainWindowViewModel>();
+
             // Region・ナビゲートによる画面遷移で、ナビゲーション対象とするビューを登録しておかないと画面遷移・表示されない。
             containerRegistry.RegisterForNavigation<ViewUsrCtrlA>();
             containerRegistry.RegisterForNavigation<ViewUsrCtrlC>();
