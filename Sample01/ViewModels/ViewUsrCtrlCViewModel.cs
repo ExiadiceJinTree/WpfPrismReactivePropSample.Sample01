@@ -132,6 +132,8 @@ namespace Sample01.ViewModels
         // Buttonでも、普通にCommandプロパティでバインドした場合は、DelegateCommand<T> のパラメータはnullになってしまいイベントパラメータは利用できない。
         private void TestA(object param)
         {
+            string msgWheatherParamIsNull = (param == null) ? "null" : "not null";
+            _messageService.ShowInfoDialog("Parameter is " + msgWheatherParamIsNull);
         }
 
         // Buttonでも、prism:InvokeCommandActionのCommandプロパティでバインドした場合は、DelegateCommand<T>のパラメータにはイベントパラメータが渡ってきて利用できる。
