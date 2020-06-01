@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:prism="http://prismlibrary.com/"
         prism:ViewModelLocator.AutoWireViewModel="True"
-        Title="{Binding Title}" Height="550" Width="600" WindowStartupLocation="CenterScreen">
+        Title="{Binding Title}" Height="500" Width="600" WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
         <!--Bool値とコントロールのVisibilityプロパティ値を変換するためのConverter(よく使うためかConverter用意済)-->
@@ -11,35 +11,43 @@
     </Window.Resources>
     
     <Grid>
-        <ScrollViewer HorizontalScrollBarVisibility="Auto">
-            <StackPanel>
-                <StackPanel Margin="5" Orientation="Horizontal">
-                    <Label Content="システム日時"/>
-                    <Label Content="{Binding SystemDateString}" MinWidth="100"/>
-                    <Button Content="システム日時更新" Command="{Binding UpdateSystemDateStrCmd}"/>
-                </StackPanel>
-                <StackPanel Margin="5">
-                    <CheckBox Content="画面UserControlAButtonEnableCheckBox" IsChecked="{Binding IsViewUsrCtrlAEnabled}"/>
-                    <Button Content="Show 画面UserControlA" Command="{Binding ShowViewUsrCtrlACmd}"/>
-                    <Button Content="Show 画面UserControlA パラメータあり" Command="{Binding ShowViewUsrCtrlAWithParamCmd}"/>
-                </StackPanel>
-                <StackPanel Margin="5">
-                    <Button Content="Show 画面UserControlB" Command="{Binding ShowViewUsrCtrlBCmd}"/>
-                    <Button Content="Show 画面UserControlB パラメータあり" Command="{Binding ShowViewUsrCtrlBWithParamCmd}"/>
-                </StackPanel>
-                <StackPanel Margin="5">
-                    <Button Content="Show 画面UserControlC with ListBox, GroupBox" Command="{Binding ShowViewUsrCtrlCCmd}"/>
-                </StackPanel>
-                <StackPanel Margin="5">
-                    <Label Content="[システム日時更新]ボタンをクリックすると、↓にボタンが表示されます。"/>
-                    <!--コントロール表示非表示はVisibilityプロパティで設定するが、値がbool型ではない。
-                        bool値と変換するためにBooleanToVisibilityConverterを用いる。-->
-                    <Button Content="表示されました"
-                            Visibility="{Binding IsVisibilityTestResultButtonVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
-                            Command="{Binding HideVisibilityTestResultButtonCmd}"/>
-                </StackPanel>
-                <ContentControl prism:RegionManager.RegionName="ContentRegion" />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>  <!--Auto: 配置されている内容の要素が必要とするサイズだけコントロールの領域を確保-->
+            <RowDefinition Height="*"/>  <!--*,2*等: Gridに比例したサイズだけコントロールの領域を確保-->
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0">
+            <StackPanel Margin="5" Orientation="Horizontal">
+                <Label Content="MainWindowVMアクセステスト用ラベル>" Margin="5"/>
+                <Label Content="{Binding MainWindowVMAccessTestLabel}" Margin="5"/>
             </StackPanel>
+            <StackPanel Margin="5" Orientation="Horizontal">
+                <Label Content="システム日時"/>
+                <Label Content="{Binding SystemDateString}" MinWidth="100"/>
+                <Button Content="システム日時更新" Command="{Binding UpdateSystemDateStrCmd}"/>
+            </StackPanel>
+            <StackPanel Margin="5">
+                <CheckBox Content="画面UserControlAButtonEnableCheckBox" IsChecked="{Binding IsViewUsrCtrlAEnabled}"/>
+                <Button Content="Show 画面UserControlA" Command="{Binding ShowViewUsrCtrlACmd}"/>
+                <Button Content="Show 画面UserControlA パラメータあり" Command="{Binding ShowViewUsrCtrlAWithParamCmd}"/>
+            </StackPanel>
+            <StackPanel Margin="5">
+                <Button Content="Show 画面UserControlB" Command="{Binding ShowViewUsrCtrlBCmd}"/>
+                <Button Content="Show 画面UserControlB パラメータあり" Command="{Binding ShowViewUsrCtrlBWithParamCmd}"/>
+            </StackPanel>
+            <StackPanel Margin="5">
+                <Button Content="Show 画面UserControlC with ListBox, GroupBox" Command="{Binding ShowViewUsrCtrlCCmd}"/>
+            </StackPanel>
+            <StackPanel Margin="5">
+                <Label Content="[システム日時更新]ボタンをクリックすると、↓にボタンが表示されます。"/>
+                <!--コントロール表示非表示はVisibilityプロパティで設定するが、値がbool型ではない。
+                    bool値と変換するためにBooleanToVisibilityConverterを用いる。-->
+                <Button Content="表示されました"
+                        Visibility="{Binding IsVisibilityTestResultButtonVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
+                        Command="{Binding HideVisibilityTestResultButtonCmd}"/>
+            </StackPanel>
+        </StackPanel>
+        <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Auto">
+            <ContentControl prism:RegionManager.RegionName="ContentRegion"/>
         </ScrollViewer>
     </Grid>
 </Window>

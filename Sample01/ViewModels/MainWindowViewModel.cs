@@ -19,6 +19,13 @@ namespace Sample01.ViewModels
             set { SetProperty(ref _title, value); }
         }
 
+        private string _mainWindowVMAccessTestLabel;
+        public string MainWindowVMAccessTestLabel
+        {
+            get { return _mainWindowVMAccessTestLabel; }
+            set { SetProperty(ref _mainWindowVMAccessTestLabel, value); }
+        }
+
         private string _systemDateString = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
         public string SystemDateString
         {
