@@ -7,21 +7,23 @@
     <Grid>
         <ScrollViewer HorizontalScrollBarVisibility="Auto">
             <StackPanel>
-                <StackPanel Orientation="Horizontal">
+                <StackPanel Margin="5" Orientation="Horizontal">
                     <Label Content="システム日時"/>
                     <Label Content="{Binding SystemDateString}" MinWidth="100"/>
                     <Button Content="システム日時更新" Command="{Binding UpdateSystemDateStrCmd}"/>
                 </StackPanel>
-                <TextBlock></TextBlock>
-                <CheckBox Content="画面UserControlAButtonEnableCheckBox" IsChecked="{Binding IsViewUsrCtrlAEnabled}"/>
-                <Button Content="Show 画面UserControlA" Command="{Binding ShowViewUsrCtrlACmd}"/>
-                <Button Content="Show 画面UserControlA パラメータあり" Command="{Binding ShowViewUsrCtrlAWithParamCmd}"/>
-                <TextBlock></TextBlock>
-                <Button Content="Show 画面UserControlB" Command="{Binding ShowViewUsrCtrlBCmd}"/>
-                <Button Content="Show 画面UserControlB パラメータあり" Command="{Binding ShowViewUsrCtrlBWithParamCmd}"/>
-                <TextBlock></TextBlock>
-                <Button Content="Show 画面UserControlC with ListBox, GroupBox" Command="{Binding ShowViewUsrCtrlCCmd}"/>
-            
+                <StackPanel Margin="5">
+                    <CheckBox Content="画面UserControlAButtonEnableCheckBox" IsChecked="{Binding IsViewUsrCtrlAEnabled}"/>
+                    <Button Content="Show 画面UserControlA" Command="{Binding ShowViewUsrCtrlACmd}"/>
+                    <Button Content="Show 画面UserControlA パラメータあり" Command="{Binding ShowViewUsrCtrlAWithParamCmd}"/>
+                </StackPanel>
+                <StackPanel Margin="5">
+                    <Button Content="Show 画面UserControlB" Command="{Binding ShowViewUsrCtrlBCmd}"/>
+                    <Button Content="Show 画面UserControlB パラメータあり" Command="{Binding ShowViewUsrCtrlBWithParamCmd}"/>
+                </StackPanel>
+                <StackPanel Margin="5">
+                    <Button Content="Show 画面UserControlC with ListBox, GroupBox" Command="{Binding ShowViewUsrCtrlCCmd}"/>
+                </StackPanel>
                 <ContentControl prism:RegionManager.RegionName="ContentRegion" />
             </StackPanel>
         </ScrollViewer>
