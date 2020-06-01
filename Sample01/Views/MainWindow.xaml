@@ -13,6 +13,7 @@
                     <Button Content="システム日時更新" Command="{Binding UpdateSystemDateStrCmd}"/>
                 </StackPanel>
                 <TextBlock></TextBlock>
+                <CheckBox Content="画面UserControlAButtonEnableCheckBox" IsChecked="{Binding IsViewUsrCtrlAEnabled}"/>
                 <Button Content="Show 画面UserControlA" Command="{Binding ShowViewUsrCtrlACmd}"/>
                 <Button Content="Show 画面UserControlA パラメータあり" Command="{Binding ShowViewUsrCtrlAWithParamCmd}"/>
                 <TextBlock></TextBlock>

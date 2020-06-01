@@ -26,6 +26,13 @@ namespace Sample01.ViewModels
             set { SetProperty(ref _systemDateString, value); }
         }
 
+        private bool _isViewUsrCtrlAEnabled;
+        public bool IsViewUsrCtrlAEnabled
+        {
+            get { return _isViewUsrCtrlAEnabled; }
+            set { SetProperty(ref _isViewUsrCtrlAEnabled, value); }
+        }
+
         public DelegateCommand UpdateSystemDateStrCmd { get; }
 
         public DelegateCommand ShowViewUsrCtrlACmd { get; }
@@ -49,8 +56,10 @@ namespace Sample01.ViewModels
             _dialogService = dialogService;
 
             this.UpdateSystemDateStrCmd = new DelegateCommand(UpdateSystemDateStr);
-            this.ShowViewUsrCtrlACmd = new DelegateCommand(ShowViewUsrCtrlA);
-            this.ShowViewUsrCtrlAWithParamCmd = new DelegateCommand(ShowViewUsrCtrlAWithParam);
+            this.ShowViewUsrCtrlACmd = new DelegateCommand(ShowViewUsrCtrlA)
+                                       .ObservesCanExecute(() => this.IsViewUsrCtrlAEnabled);  // ボタンの有効無効条件を設定
+            this.ShowViewUsrCtrlAWithParamCmd = new DelegateCommand(ShowViewUsrCtrlAWithParam)
+                                                .ObservesCanExecute(() => this.IsViewUsrCtrlAEnabled);  // ボタンの有効無効条件を設定
             this.ShowViewUsrCtrlBCmd = new DelegateCommand(ShowViewUsrCtrlB);
             this.ShowViewUsrCtrlBWithParamCmd = new DelegateCommand(ShowViewUsrCtrlBWithParam);
             this.ShowViewUsrCtrlCCmd = new DelegateCommand(ShowViewUsrCtrlC);
