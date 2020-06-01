@@ -1,0 +1,15 @@
+﻿<UserControl x:Class="Sample01.Views.ViewUsrCtrlA"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/"             
+             prism:ViewModelLocator.AutoWireViewModel="True">
+    <Grid>
+        <StackPanel>
+            <Label Content="画面UserControlA" FontSize="30" Foreground="Brown"/>
+            <Label Content="{Binding ParamALabel}"/>
+            <TextBox TextWrapping="Wrap"/>
+            <Button Content="OK" Command="{Binding OkCmd}"/>
+            <Button Content="OK2" Command="{Binding Ok2Cmd}"/>
+        </StackPanel>
+    </Grid>
+</UserControl>
